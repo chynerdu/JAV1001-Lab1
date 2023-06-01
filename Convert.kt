@@ -1,18 +1,16 @@
 
 
 import kotlin.text.toLowerCase
-
-enum class BASEUNITS(val value: Double) {
-    KMTOMI(0.62),
-    MITOKM(1.61),
-    CMTOINCH(0.39),
-    INCHTOCM(2.54),
-    KGTOLB(2.2),
-    LBTOKG(0.45),
-    GTOOZ(0.04),
-    OZTOG(28.35),
-}
 fun main() {
+    val kMTOMI = 0.62
+    val mITOKM = 1.61
+    val cMTOINCH = 0.39
+    val iNCHTOCM = 2.54
+    val kGTOLB = 2.2
+    val lBTOKG = 0.45
+    val gTOOZ = 0.04
+    val oZTOG = 28.35
+
     println("Enter measurement unit (km, mi, cm, inch, lib, kg, ox, gram)")
     val measurementUnit = readLine()
     val formattedMeasurementUnit = measurementUnit
@@ -21,25 +19,25 @@ fun main() {
 
     fun convertValues(baseUnit: String, baseValue: Double) {
         var result: Double = value * baseValue
-        println("$value in $formattedMeasurementUnit is $result in $baseUnit")
+        println("$value$formattedMeasurementUnit is $result in $baseUnit")
     }
 
     when (formattedMeasurementUnit?.toLowerCase()) {
-        "km" -> convertValues("Mi", BASEUNITS.KMTOMI.value)
+        "km" -> convertValues("Mi", kMTOMI)
 
-        "mi" -> convertValues("Km", BASEUNITS.MITOKM.value)
+        "mi" -> convertValues("Km", mITOKM)
 
-        "cm" -> convertValues("Inch", BASEUNITS.CMTOINCH.value)
+        "cm" -> convertValues("Inch", cMTOINCH)
 
-        "inch" -> convertValues("Cm", BASEUNITS.INCHTOCM.value)
+        "inch" -> convertValues("Cm", iNCHTOCM)
 
-        "lib" -> convertValues("Kg", BASEUNITS.LBTOKG.value)
+        "lib" -> convertValues("Kg", lBTOKG)
 
-        "kg" -> convertValues("Li", BASEUNITS.KGTOLB.value)
+        "kg" -> convertValues("Li", kGTOLB)
 
-        "ox" -> convertValues("G", BASEUNITS.OZTOG.value)
+        "ox" -> convertValues("G", oZTOG)
 
-        "gram" -> convertValues("Oz", BASEUNITS.GTOOZ.value)
+        "gram" -> convertValues("Oz", gTOOZ)
 
         else -> {
             println("specified unit not found")
