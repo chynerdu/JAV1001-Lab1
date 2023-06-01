@@ -1,32 +1,49 @@
 
 
-fun main() {
-    val kmToMi = 0.62
-    val miToKm = 1.61
-    val cmToInch = 0.39
-    val inchToCm = 2.54
-    val kgToLb = 2.2
-    val lbToKg = 0.45
-    val gToOz = 0.04
-    val ozToG = 28.35
+import kotlin.text.toLowerCase
 
-    println("hello there")
-    println("Enter unit to convert to (km or Mi)")
+enum class BASEUNITS(val value: Double) {
+    KMTOMI(0.62),
+    MITOKM(1.61),
+    CMTOINCH(0.39),
+    INCHTOCM(2.54),
+    KGTOLB(2.2),
+    LBTOKG(0.45),
+    GTOOZ(0.04),
+    OZTOG(28.35),
+}
+fun main() {
+    println("Enter measurement unit (km, mi, cm, inch, lib, kg, ox, gram)")
     val measurementUnit = readLine()
     val formattedMeasurementUnit = measurementUnit
     println("Enter value to convert")
     var value = readLine()!!.toDouble()
-    var result = 0.0
-    when (formattedMeasurementUnit) {
-        "km" -> result = value * miToKm
-        "mi" -> result = value * kmToMi
-        "cm" -> result = value * inchToCm
-        "inch" -> result = value * cmToInch
-        "lib" -> result = value * kgToLb
-        "kg" -> result = value * lbToKg
-        "ox" -> result = value * gToOz
-        "gram" -> result = value * ozToG
 
-        else -> println("specified unit not found")
+    fun convertValues(baseUnit: String, baseValue: Double) {
+        var result: Double = value * baseValue
+        println("$value in $formattedMeasurementUnit is $result in $baseUnit")
+    }
+
+    when (formattedMeasurementUnit?.toLowerCase()) {
+        "km" -> convertValues("Mi", BASEUNITS.KMTOMI.value)
+
+        "mi" -> convertValues("Km", BASEUNITS.MITOKM.value)
+
+        "cm" -> convertValues("Inch", BASEUNITS.CMTOINCH.value)
+
+        "inch" -> convertValues("Cm", BASEUNITS.INCHTOCM.value)
+
+        "lib" -> convertValues("Kg", BASEUNITS.LBTOKG.value)
+
+        "kg" -> convertValues("Li", BASEUNITS.KGTOLB.value)
+
+        "ox" -> convertValues("G", BASEUNITS.OZTOG.value)
+
+        "gram" -> convertValues("Oz", BASEUNITS.GTOOZ.value)
+
+        else -> {
+            println("specified unit not found")
+            return
+        }
     }
 }
